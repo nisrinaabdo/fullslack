@@ -21,3 +21,5 @@ export const reducer = (state = initialState , action) => {
   }
 }
 
+export const reducer = (state = {} , action) => state;
+
