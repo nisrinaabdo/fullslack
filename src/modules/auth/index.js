@@ -8,6 +8,7 @@ export const GITHUB_RESET_USER = '@@github/RESET_USER'
 export const GITHUB_LOGOUT = '@@github/LOGOUT'
 
 const provider = new firebase.auth.GithubAuthProvider();
+provider.addScope('user');
 
 export const githubAuth = (data) => 
     (dispatch) => {

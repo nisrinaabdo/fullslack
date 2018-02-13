@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Login from '../../../auth/components/Login'
 import Logout from '../../../auth/components/Logout'
+import Profile from '../../../auth/components/Profile'
 
 import './layout.css';
 
@@ -22,7 +23,7 @@ class Layout extends Component {
             </header>
             <aside className="app-side">
                 { /* profile header & rooms list */}
-                <Logout/>
+                <Profile />
             </aside>
             <section className="app-main">
                 { /* routes, ex: current chat window, other pages */}
