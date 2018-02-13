@@ -11,9 +11,15 @@ class MessageBox extends Component {
     datetime:''
   }
   
+  setDatetime() {
+    const d = new Date()
+    return `${d.getDate()}-${d.getMonth()+1}-${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`
+  }
+  // 13-02-2018 16:54:55
+
   onSubmitMessage = (e) => {
     e.preventDefault();
-    this.state.datetime = Date.now()
+    this.state.datetime = this.setDatetime()
     this.props.dispatch(submitMessage(this.state))
     this.setState({messageBody: ''})
   }
@@ -24,7 +30,6 @@ class MessageBox extends Component {
 
   render() {
     const { messageBody } = this.state;
-    console.log(messageBody)
     return (
       <div className="messageBox">
         <input
