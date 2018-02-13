@@ -20,10 +20,10 @@ class Layout extends Component {
             <div className="app-layout">
             <header className="app-header">
                 <h1 className="app-title">Fullslack</h1>
+                <Profile />
             </header>
             <aside className="app-side">
                 { /* profile header & rooms list */}
-                <Profile />
             </aside>
             <section className="app-main">
                 { /* routes, ex: current chat window, other pages */}
