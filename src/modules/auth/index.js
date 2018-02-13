@@ -1,1 +1,2 @@
-export const reducer = (state = {} , action) => state; 
+export const reducer = (state = {} , action) => state;
+
