@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import { firebase } from 'firebase';
+import firebase from 'firebase';
 
 import { reducer as authReducer } from './modules/auth';
 import { reducer as mainReducer } from './modules/main';
@@ -23,9 +23,11 @@ const appReducer = combineReducers({
     rooms: roomsReducer
 })
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
 const store = createStore(
     appReducer,
-    applyMiddleware(thunk)
+    composeEnhancers(applyMiddleware(thunk))
 );
 
 ReactDOM.render(
