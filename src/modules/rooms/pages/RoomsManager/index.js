@@ -6,7 +6,7 @@ import './roomsManager.css'
 import RoomsList from '../../components/RoomsList'
 import CreateRoom from '../../components/CreateRoom'
 
-import {updateList} from '../../index'
+import {updateList, createRoom} from '../../index'
 
 class RoomsManager extends Component {
   componentWillMount () {
@@ -22,11 +22,13 @@ class RoomsManager extends Component {
     dispatch(updateList(initialList))
   }
 
+  onCreateRoom = (room) => this.props.dispatch(createRoom(room))
+
   render () {
     const { listRooms } = this.props
     return (
       <div className='roomsManagerWrapper'>
-        <CreateRoom />
+        <CreateRoom creationCbk={this.onCreateRoom} />
         <RoomsList rooms={listRooms} />
       </div>
     )

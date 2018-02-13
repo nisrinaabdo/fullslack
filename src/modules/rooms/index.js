@@ -1,9 +1,16 @@
-const UPDATE_LIST = '@@roomsList/UPDATE_LIST'
+const UPDATE_LIST = '@@rooms/UPDATE_LIST'
+const CREATE_ROOM = '@@rooms/CREATE_ROOM'
 
 //ACTION: update list values
 export const updateList = (values) => ({
   type: UPDATE_LIST,
   payload: values
+})
+
+//ACTION: create new room
+export const createRoom = (name) => ({
+  type: CREATE_ROOM,
+  payload: name
 })
 
 const initialState = {
@@ -16,6 +23,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         listRooms: action.payload
+      }
+    case CREATE_ROOM:
+      console.log(action.payload)
+      return {
+        ...state,
+        listRooms: [...state.listRooms, action.payload]
       }
     default:
       return state

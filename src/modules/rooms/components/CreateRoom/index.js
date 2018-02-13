@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-//import { connect } from 'react-redux'
 import './createRoom.css'
+
+import createRoom from '../../index'
 
 class CreateRoom extends Component {
   constructor (props){
@@ -11,6 +12,7 @@ class CreateRoom extends Component {
 
     this.showForm = this.showForm.bind(this)
     this.showAddButton = this.showAddButton.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   displayAddButton = () => {
@@ -26,12 +28,20 @@ class CreateRoom extends Component {
 
   displayForm = () => {
     return (
-      <form onSubmit={this.handleCreation}>
-        <input type="text" name="name" />
+      <form onSubmit={this.handleSubmit}>
+        <input type="text" name="name" required/>
         <input type="submit" value="OK" />
         <button onClick={this.showAddButton}>CANCEL</button>
       </form>
     )
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault()
+    const newRoom = {
+      name: event.target.name.value
+    }
+    this.props.creationCbk(newRoom)
   }
 
   showAddButton = (event) => {
