@@ -11,7 +11,7 @@ import { reducer as chatReducer } from './modules/chat';
 import { reducer as roomsReducer } from './modules/rooms';
 
 import './index.css';
-import App from './App';
+import Layout from './modules/main/pages/Layout';
 import registerServiceWorker from './registerServiceWorker';
 import firebaseConfig from  './firebase-config.json';
 
@@ -32,7 +32,7 @@ const store = createStore(
 
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <Layout />
     </Provider>, 
     document.getElementById('root')
 );
