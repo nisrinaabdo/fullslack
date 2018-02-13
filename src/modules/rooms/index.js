@@ -7,7 +7,7 @@ export const updateList = (values) => ({
 })
 
 const initialState = {
-  list: []
+  listRooms: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -15,7 +15,7 @@ const reducer = (state = initialState, action) => {
     case UPDATE_LIST:
       return {
         ...state,
-        list: action.payload
+        listRooms: action.payload
       }
     default:
       return state
