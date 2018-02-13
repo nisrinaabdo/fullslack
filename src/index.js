@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 import { firebase } from 'firebase';
 
 import { reducer as authReducer } from './modules/auth';
@@ -22,7 +23,10 @@ const appReducer = combineReducers({
     rooms: roomsReducer
 })
 
-const store = createStore(appReducer);
+const store = createStore(
+    appReducer,
+    applyMiddleware(thunk)
+);
 
 ReactDOM.render(
     <Provider store={store}>
