@@ -1,0 +1,11 @@
+.wrapper{
+
+    width: auto;
+    border: 1px solid ;
+    color:black;
+    height:auto;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: rgb(187, 189, 190);
+    padding: 24px;
+    margin: auto;
+}

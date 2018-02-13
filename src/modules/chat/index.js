@@ -22,4 +22,8 @@ export const reducer = (state = initialState , action) => {
 <<<<<<< HEAD
 =======
 
+<<<<<<< HEAD
 >>>>>>> 2d9d5110c083e4d01bf28c89c8e4f3c9dff312ee
+=======
+
+>>>>>>> Fixes chat pagesetup
