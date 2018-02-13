@@ -1,28 +1,23 @@
-import React from 'react'
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom'
+export const SUBMIT_MESSAGE = '@@chat/SUBMIT_MESSAGE';
 
-<<<<<<< HEAD
-const message = 
-=======
->>>>>>> 3f640b8aae04532a6fc83c84027379cb2f5f6a89
+export const submitMessage = (msg) =>({
+  type: SUBMIT_MESSAGE,
+  payload: msg
+});
 
-const messageList = () => (
-  
-)
+const initialState = {
+  roomName: '',
+  messages: []
+}
 
-
-<<<<<<< HEAD
-const chatBox = () => (
-
-)
-=======
-const chatBox = 
->>>>>>> 3f640b8aae04532a6fc83c84027379cb2f5f6a89
-
-
-export const reducer = (state = {} , action) => state;
+export const reducer = (state = initialState , action) => {
+  switch(action.type) {
+    case SUBMIT_MESSAGE:
+      return {
+        ...state,
+        messages: [...state.messages, action.payload] 
+      }
+    default: return state;
+  }
+}
 
