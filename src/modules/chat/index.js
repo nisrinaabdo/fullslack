@@ -5,13 +5,16 @@ import {
   Link
 } from 'react-router-dom'
 
+const message = 
 
 const messageList = () => (
   
 )
 
 
-const chatBox = 
+const chatBox = () => (
+
+)
 
 
 export const reducer = (state = {} , action) => state;
