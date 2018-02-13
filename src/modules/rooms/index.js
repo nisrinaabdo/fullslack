@@ -1,4 +1,4 @@
-const UPDATE_LIST='@@roomsList/UPDATE_LIST'
+const UPDATE_LIST = '@@roomsList/UPDATE_LIST'
 
 //ACTION: update list values
 export const updateList = (values) => ({
@@ -21,7 +21,5 @@ const reducer = (state = initialState, action) => {
       return state
   }
 }
-
-
 
 export default reducer
