@@ -25,7 +25,6 @@ const reducer = (state = initialState, action) => {
         listRooms: action.payload
       }
     case CREATE_ROOM:
-      console.log(action.payload)
       return {
         ...state,
         listRooms: [...state.listRooms, action.payload]

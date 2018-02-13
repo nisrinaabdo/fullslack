@@ -1,0 +1,12 @@
+.createRoomWrapper {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.btn {
+    width: 20%;
+}
+
+

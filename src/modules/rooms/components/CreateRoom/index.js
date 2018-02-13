@@ -17,7 +17,7 @@ class CreateRoom extends Component {
 
   displayAddButton = () => {
     return (
-      <button onClick={this.showForm}>Add</button>
+      <button onClick={this.showForm} class="btn btn-add">Add</button>
     )
   }
 
@@ -30,8 +30,8 @@ class CreateRoom extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <input type="text" name="name" required/>
-        <input type="submit" value="OK" />
-        <button onClick={this.showAddButton}>CANCEL</button>
+        <input type="submit" class="btn btn-ok" value="OK" />
+        <button onClick={this.showAddButton} class="btn btn-cancel">CANCEL</button>
       </form>
     )
   }
