@@ -1,19 +1,22 @@
+import * as firebase from 'firebase';
 
 export const GITHUB_AUTH = '@@github/AUTH'
 export const GITHUB_AUTH_SUCCESS = '@@github/AUTH_SUCCESS'
 export const GITHUB_AUTH_FAILURE = '@@github/AUTH_FAILURE'
-
+export const GITHUB_LOAD_USER = '@@github/LOAD_USER'
+export const GITHUB_RESET_USER = '@@github/RESET_USER'
 
 const provider = new firebase.auth.GithubAuthProvider();
 
-const githubAuth = (data) => {
+export const githubAuth = (data) => 
     (dispatch) => {
         dispatch({ type: GITHUB_AUTH })
-        return firebase.auth().signInWithRedirect(provider)
-        .then(githubAuthSuccess())
-        .catch(githubAuthFailure());
+        firebase.auth().signInWithRedirect(provider)
+        return firebase.auth().getRedirectResult()
+        .then(result => dispatch(githubAuthSuccess(result)))
+        .catch(error => dispatch(githubAuthFailure(error)))
     }
-}
+
 
 const githubAuthSuccess = (result)=> {
     if (result.credential) {
@@ -46,7 +49,7 @@ const githubAuthFailure = (error) => {
 }
 
 const initialState = {
-    user: {},
+    user: null,
     token: '',
     error: {},
 }
@@ -56,18 +59,33 @@ export const reducer = (state = initialState , action) => {
         case GITHUB_AUTH:
             return {
                 ...state,
-                initialState
+                ...initialState
             }
         case GITHUB_AUTH_FAILURE:
             return {
                 ...state,
                 error: action.error,
             }
+
         case GITHUB_AUTH_SUCCESS:
+            localStorage.setItem('token', action.token)
             return {
                 ...state,
                 user : action.user,
                 token: action.token,
             }
+        case GITHUB_LOAD_USER:
+            return {
+                ...state,
+                user: action.user
+            }
+
+        case GITHUB_RESET_USER:
+        return {
+            ...state,
+            user: null
+        }
+        default:
+            return state
     }
 }
