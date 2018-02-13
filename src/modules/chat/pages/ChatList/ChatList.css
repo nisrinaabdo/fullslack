@@ -1,5 +1,9 @@
 .wrapper{
-
+    position: absolute;
+    top: 30px;
+    right: 0px;
+    bottom: 0px;
+    left: 200px;
     width: auto;
     border: 1px solid ;
     color:black;
@@ -8,4 +12,10 @@
     background-color: rgb(187, 189, 190);
     padding: 24px;
     margin: auto;
+}
+.messageBox {
+    position: fixed;
+    bottom: 5px;
+    right: 0px;
+    left: 210px;
 }
