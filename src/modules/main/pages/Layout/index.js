@@ -17,6 +17,7 @@ class Layout extends Component {
                     </aside>
                     <section className="app-main">
                         <ChatList/>
+                        
                     </section>
                 </div>
             </Router>

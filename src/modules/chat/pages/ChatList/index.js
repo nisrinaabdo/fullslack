@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './ChatList.css';
-
-
+import MessageList from '../../components/MessageList'
+import MessageBox from '../../components/MessageBox'
 class ChatList extends Component {
 
     state={
@@ -13,7 +13,9 @@ class ChatList extends Component {
 
         return (<div className="wrapper">
         
-        test
+       MessageList
+       MessageBox
+       
         
         </div>)
     }
