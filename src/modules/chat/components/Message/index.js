@@ -5,8 +5,8 @@ class Message extends Component {
     const { user, datetime, messageBody } = this.props;
     return (
       <div className="messageWrapper">
-        <h4> { user } </h4> 
-        <p> { datetime } </p>
+        <b> { user } </b> 
+        <i> { datetime } </i>
         <p> { messageBody } </p>
       </div>
     )

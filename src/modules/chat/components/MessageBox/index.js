@@ -18,10 +18,16 @@ class MessageBox extends Component {
   // 13-02-2018 16:54:55
 
   onSubmitMessage = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     this.state.datetime = this.setDatetime()
     this.props.dispatch(submitMessage(this.state))
     this.setState({messageBody: ''})
+  }
+
+  handleKeyPress = (e) => {
+    if(e.key == 'Enter' && this.state.messageBody !== ''){
+      this.onSubmitMessage()
+    }
   }
   
   onInput = (e) => {
@@ -38,12 +44,13 @@ class MessageBox extends Component {
           onChange={this.onInput}
           placeholder='Put your text here'
           style={{ width: '90%' }}
+          onKeyPress={this.handleKeyPress}
         />
         <button
           type='submit'
           onClick={ this.onSubmitMessage }
           style={{ width: '10%' }}
-          > Send ! </button>
+          > send </button>
       </div>
     )
   }
