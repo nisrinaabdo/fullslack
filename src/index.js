@@ -15,7 +15,7 @@ import Layout from './modules/main/pages/Layout';
 import registerServiceWorker from './registerServiceWorker';
 import firebaseConfig from  './firebase-config.json';
 
-//const app = firebase.initializeApp(firebaseConfig);
+const app = firebase.initializeApp(firebaseConfig);
 const appReducer = combineReducers({
     auth: authReducer,
     main: mainReducer,

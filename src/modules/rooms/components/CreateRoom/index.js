@@ -42,6 +42,7 @@ class CreateRoom extends Component {
       name: event.target.name.value
     }
     this.props.creationCbk(newRoom)
+    this.setState({formActive: false})
   }
 
   showAddButton = (event) => {
