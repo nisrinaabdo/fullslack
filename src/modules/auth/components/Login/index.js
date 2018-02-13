@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { githubAuth, GITHUB_LOAD_USER, GITHUB_RESET_USER }  from '../../index'
 import * as firebase from 'firebase';
+
 class Login extends Component {
     auth = (e) => {
         e.preventDefault()

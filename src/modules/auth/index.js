@@ -5,6 +5,7 @@ export const GITHUB_AUTH_SUCCESS = '@@github/AUTH_SUCCESS'
 export const GITHUB_AUTH_FAILURE = '@@github/AUTH_FAILURE'
 export const GITHUB_LOAD_USER = '@@github/LOAD_USER'
 export const GITHUB_RESET_USER = '@@github/RESET_USER'
+export const GITHUB_LOGOUT = '@@github/LOGOUT'
 
 const provider = new firebase.auth.GithubAuthProvider();
 
@@ -48,6 +49,17 @@ const githubAuthFailure = (error) => {
    }
 }
 
+export const githubLogout = () => {
+    firebase.auth().signOut().then(function() {
+        // Sign-out successful.
+      }).catch(function(error) {
+        // An error happened.
+      });
+    return {
+        type: GITHUB_LOGOUT,
+    }
+}
+
 const initialState = {
     user: null,
     token: '',
@@ -85,6 +97,10 @@ export const reducer = (state = initialState , action) => {
             ...state,
             user: null
         }
+        case GITHUB_LOGOUT:
+        return {
+            ...state,
+            }
         default:
             return state
     }

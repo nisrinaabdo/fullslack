@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import Login from '../../../auth/pages/Login'
+import Login from '../../../auth/components/Login'
+import Logout from '../../../auth/components/Logout'
 
 import './layout.css';
 
@@ -21,6 +22,7 @@ class Layout extends Component {
             </header>
             <aside className="app-side">
                 { /* profile header & rooms list */}
+                <Logout/>
             </aside>
             <section className="app-main">
                 { /* routes, ex: current chat window, other pages */}
