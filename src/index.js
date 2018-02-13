@@ -23,9 +23,11 @@ const appReducer = combineReducers({
     rooms: roomsReducer
 })
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
 const store = createStore(
     appReducer,
-    applyMiddleware(thunk)
+    composeEnhancers(applyMiddleware(thunk))
 );
 
 ReactDOM.render(
