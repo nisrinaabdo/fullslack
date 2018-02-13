@@ -12,15 +12,9 @@ import { reducer as roomsReducer } from './modules/rooms';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+import firebaseConfig from  './firebase-config.json';
 
-const app = firebase.initializeApp({
-    apiKey: "AIzaSyBEcsJrTE3zQX9KWI4ludSzKUwm7X0n904",
-    authDomain: "dafs-59108.firebaseapp.com",
-    databaseURL: "https://dafs-59108.firebaseio.com",
-    projectId: "dafs-59108",
-    storageBucket: "dafs-59108.appspot.com",
-    messagingSenderId: "898840147930"
-  });
+const app = firebase.initializeApp(firebaseConfig);
 const appReducer = combineReducers({
     auth: authReducer,
     main: mainReducer,
