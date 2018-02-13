@@ -19,3 +19,7 @@ export const reducer = (state = initialState , action) => {
     default: return state;
   }
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2d9d5110c083e4d01bf28c89c8e4f3c9dff312ee
