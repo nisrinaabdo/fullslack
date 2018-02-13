@@ -2,11 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-<<<<<<< HEAD
-import { firebase } from 'firebase';
-=======
 import thunk from 'redux-thunk';
->>>>>>> Add redux-thunk middleware
+import { firebase } from 'firebase';
 
 import { reducer as authReducer } from './modules/auth';
 import { reducer as mainReducer } from './modules/main';
