@@ -13,8 +13,8 @@ class ChatList extends Component {
 
         return (<div className="wrapper">
         
-       MessageList
-       MessageBox
+       <MessageList/>
+       <MessageBox/>
        
         
         </div>)
