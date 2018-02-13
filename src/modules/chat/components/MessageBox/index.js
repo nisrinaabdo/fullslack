@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 import { submitMessage } from '../../index';
 
-class messageBox extends Component {
+class MessageBox extends Component {
 
   state = {
     user: 'toto',
     messageBody: '',
-    datetime:'',
-    room: 'ROOM 1'
+    datetime:''
   }
   
   onSubmitMessage = (e) => {
@@ -36,4 +36,6 @@ class messageBox extends Component {
   }
 }
 
-export default messageBox;
+export default connect(
+  state => state.messageBox
+)(MessageBox);
