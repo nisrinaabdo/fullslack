@@ -13,8 +13,9 @@ class MessageBox extends Component {
   
   onSubmitMessage = (e) => {
     e.preventDefault();
-    this.state.datetime = new Date.now()
+    this.state.datetime = Date.now()
     this.props.dispatch(submitMessage(this.state))
+    this.setState({messageBody: ''})
   }
   
   onInput = (e) => {
@@ -23,6 +24,7 @@ class MessageBox extends Component {
 
   render() {
     const { messageBody } = this.state;
+    console.log(messageBody)
     return (
       <div className="messageBox">
         <input
@@ -34,7 +36,7 @@ class MessageBox extends Component {
         />
         <button
           type='submit'
-          onclick={ this.onSubmitMessage }
+          onClick={ this.onSubmitMessage }
           style={{ width: '10%' }}
           > Send ! </button>
       </div>
@@ -42,6 +44,4 @@ class MessageBox extends Component {
   }
 }
 
-export default connect(
-  state => state.messageBox
-)(MessageBox);
+export default connect()(MessageBox);
