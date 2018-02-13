@@ -28,7 +28,6 @@ class Layout extends Component {
                 <RoomsManager />
             </aside>
             <section className="app-main">
-
               <ChatList/>
             </section>
             </div>
