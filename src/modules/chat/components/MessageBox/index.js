@@ -17,6 +17,10 @@ class MessageBox extends Component {
     this.props.dispatch(submitMessage(this.state))
   }
   
+  onInput = (e) => {
+    this.setState({ messageBody: e.target.value });
+  }
+
   render() {
     const { messageBody } = this.state;
     return (
@@ -24,12 +28,14 @@ class MessageBox extends Component {
         <input
           type='text'
           value={ messageBody }
+          onChange={this.onInput}
           placeholder='Put your text here'
+          style={{ width: '90%' }}
         />
         <button
-          id='mesage-box-button'
           type='submit'
           onclick={ this.onSubmitMessage }
+          style={{ width: '10%' }}
           > Send ! </button>
       </div>
     )
