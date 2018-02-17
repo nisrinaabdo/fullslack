@@ -17,7 +17,9 @@ class CreateRoom extends Component {
 
   displayAddButton = () => {
     return (
-      <button onClick={this.showForm} class="btn btn-add">Add</button>
+      <div id="addButtonWrapper">
+        <span>Rooms</span><button onClick={this.showForm} className="btn btn-add">Add</button>
+      </div>
     )
   }
 
@@ -29,20 +31,25 @@ class CreateRoom extends Component {
   displayForm = () => {
     return (
       <form onSubmit={this.handleSubmit}>
-        <input type="text" name="name" required/>
-        <input type="submit" class="btn btn-ok" value="OK" />
-        <button onClick={this.showAddButton} class="btn btn-cancel">CANCEL</button>
+        <input type="text" name="name" placeholder="name" required/>
+        <input type="text" name="description" placeholder="description"/>
+        <input type="submit" className="btn btn-ok" value="OK" />
+        <button onClick={this.showAddButton} className="btn btn-cancel">CANCEL</button>
       </form>
     )
   }
 
   handleSubmit = (event) => {
     event.preventDefault()
-    const newRoom = {
-      name: event.target.name.value
+    if (event) {
+      const target = event.target
+      const newRoom = {
+        name: target.name.value.trim(),
+        description: target.description.value.trim()
+      }
+      this.props.creationCbk(newRoom)
+      this.setState({formActive: false})
     }
-    this.props.creationCbk(newRoom)
-    this.setState({formActive: false})
   }
 
   showAddButton = (event) => {
@@ -52,7 +59,7 @@ class CreateRoom extends Component {
 
   render () {
     return (
-      <div className='createRoomWrapper'>
+      <div id='createRoomWrapper'>
         {this.state.formActive ? this.displayForm() : this.displayAddButton()}
       </div>
     )

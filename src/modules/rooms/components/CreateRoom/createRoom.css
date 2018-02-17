@@ -1,12 +1,46 @@
-.createRoomWrapper {
-    margin: 0 auto;
+#createRoomWrapper {
+    margin: 5px;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#addButtonWrapper {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#addButtonWrapper span {
+    display: block;
+    color: white;
+    margin-left: 10px;
 }
 
 .btn {
     width: 20%;
 }
+
+.btn-add {
+    align-self: flex-end;
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px rgb(125, 125, 125) solid;
+    color: white;
+    padding: 5px 0px 5px 0px;
+}
+
+.btn-ok {
+    width: 30%;
+}
+
+.btn-cancel {
+    width: 30%;
+}
+
+input[type="text"] {
+    width: 99%;
+}
+
 
 

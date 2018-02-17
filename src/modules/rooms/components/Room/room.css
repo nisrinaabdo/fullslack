@@ -1,5 +1,12 @@
 .roomWrapper {
-    margin: 5px;
-    padding: 5px;
+    padding: 5px 5px 5px 15px;
     color: white;
+}
+
+.roomWrapper:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.roomWrapper:active {
+    background: rgba(50, 153, 93, 0.2);
 }

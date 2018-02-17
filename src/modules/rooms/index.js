@@ -8,9 +8,9 @@ export const updateList = (values) => ({
 })
 
 //ACTION: create new room
-export const createRoom = (name) => ({
+export const createRoom = (newRoom) => ({
   type: CREATE_ROOM,
-  payload: name
+  payload: newRoom
 })
 
 const initialState = {

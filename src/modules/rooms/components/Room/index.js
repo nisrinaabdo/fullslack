@@ -5,7 +5,7 @@ function Room (props) {
   console.log(props)
   const { id, name } = props.data
   return (
-    <li className='roomWrapper'>
+    <li className='roomWrapper' key={ id }>
       { name }
     </li>
   )
