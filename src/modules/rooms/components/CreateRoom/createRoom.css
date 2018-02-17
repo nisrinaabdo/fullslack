@@ -1,8 +1,6 @@
 #createRoomWrapper {
     margin: 5px;
     width: auto;
-    display: flex;
-    flex-direction: column;
 }
 
 #addButtonWrapper {
@@ -18,29 +16,55 @@
     margin-left: 10px;
 }
 
-.btn {
-    width: 20%;
+#addFormWrapper span {
+    display: block;
+    color: white;
+    font-size: 14px;
+    padding-left: 4px;
 }
 
-.btn-add {
-    align-self: flex-end;
+#addFormWrapper form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 5px;
+    justify-content: flex-end;
+}
+
+#addFormWrapper input[type="text"] {
+    margin: 0px 0px 5px 0px;
+    padding: 5px 0px 5px 5px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.25);
+    border: 1px rgb(125, 125, 125) solid;
+    color: white;
+}
+
+.btn {
+    width: 30%;
     background-color: rgba(0, 0, 0, 0);
     border: 1px rgb(125, 125, 125) solid;
     color: white;
     padding: 5px 0px 5px 0px;
 }
 
-.btn-ok {
-    width: 30%;
+.btn-add:hover {
+    background-color: rgb(57, 114, 158);
+    border: 1px rgb(53, 94, 230) solid;
+}
+
+.btn-ok:hover {
+    background-color: rgb(57, 158, 77);
+    border: 1px rgb(53, 230, 53) solid;
 }
 
 .btn-cancel {
-    width: 30%;
+    margin-left: 10px;
 }
 
-input[type="text"] {
-    width: 99%;
+.btn-cancel:hover {
+    background-color: rgb(158, 81, 57);
+    border: 1px rgb(230, 65, 53) solid;
 }
-
 
 

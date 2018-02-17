@@ -30,12 +30,15 @@ class CreateRoom extends Component {
 
   displayForm = () => {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input type="text" name="name" placeholder="name" required/>
-        <input type="text" name="description" placeholder="description"/>
-        <input type="submit" className="btn btn-ok" value="OK" />
-        <button onClick={this.showAddButton} className="btn btn-cancel">CANCEL</button>
-      </form>
+      <div id="addFormWrapper">
+        <span>Add new chat-room:</span>
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" name="name" placeholder="Name" required/>
+          <input type="text" name="description" placeholder="Description"/>
+          <input type="submit" className="btn btn-ok" value="OK" />
+          <button onClick={this.showAddButton} className="btn btn-cancel">CANCEL</button>
+        </form>
+      </div>
     )
   }
 
