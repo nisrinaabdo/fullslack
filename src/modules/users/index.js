@@ -10,17 +10,18 @@ export const USERS_FETCH_FAILURE = '@@users/FETCH_FAILURE'
 export const USERS_LOAD = '@@users/LOAD'
 export const USERS_LOGOUT = '@@users/LOGOUT'
 
-const addUserSuccess = (user) => ({
+const addUserSuccess = user => ({
     type: USERS_ADD_SUCCESS,
     user,
 })
-const addUserFailure = (error) => ({
+
+const addUserFailure = error => ({
     type: USERS_ADD_FAILURE,
     error,
 })
 
-export const addUser = (user) => 
-    (dispatch) => {
+export const addUser = user =>
+    dispatch => {
         dispatch({ type: USERS_ADD })
         firebase.database().ref('/users/' + user.uid)
             .set({
@@ -30,42 +31,47 @@ export const addUser = (user) =>
           .catch(error => dispatch(addUserFailure(error)))
     }
 
-const fetchUsersSuccess = (list) => ({
+const fetchUsersSuccess = list => ({
     type: USERS_FETCH_SUCCESS,
     list,
 })
 
-const fetchUsersFailure = (error) => ({
+const fetchUsersFailure = error => ({
     type: USERS_FETCH_FAILURE,
     error,
     isLoading: false,
 })
 
 const listenUser = (snapshot, users, dispatch) => {
-    snapshot.forEach((chilSnapshot) => users[chilSnapshot.key] = chilSnapshot.val())
+    snapshot.forEach((childSnapshot) => {
+        users[snapshot.key] = {
+            ...users[snapshot.key],
+            [childSnapshot.key]: childSnapshot.val()
+        }
+    })
     return dispatch(fetchUsersSuccess(users))
 }
 
-export const fetchUsers = (users) => 
-    (dispatch) => {
+export const fetchUsers = users =>
+    dispatch => {
         dispatch({ type: USERS_FETCH })
         const users = {}
-        const request = firebase.database().ref('/users')
-        const response = request.once('value')
-            .then((snapshot) => listenUser(snapshot, users, dispatch))
-            .catch(error => dispatch(fetchUsersFailure(error)))
-        request.on('value', (snapshot) => listenUser(snapshot, users, dispatch))
-        return response
+        return firebase.database().ref('/users/').on('child_added', snapshot => listenUser(snapshot, users, dispatch))
     }
 
-export const changeUserAuthState = (user) =>
-    (dispatch) => {
+export const fetchByUserId = id =>
+    dispatch => {
+        return firebase.database().ref('/users/'+id).once('value')
+            .catch(error => dispatch(fetchUsersFailure(error)))
+    }
+
+export const changeUserAuthState = user =>
+    dispatch => {
         if (user) {
-            dispatch(fetchUsers())
-                .then((data) => {
-                    if (data.list[user.uid] === undefined) {
+            dispatch(fetchByUserId(user.uid))
+                .then((snapshot) => {
+                    if (snapshot.val() === undefined)
                         dispatch(addUser(user))
-                    }
                     dispatch(githubLoadUser(user))
                 })
         } else
