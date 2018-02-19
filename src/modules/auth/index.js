@@ -105,10 +105,6 @@ export const reducer = (state = initialState , action) => {
                 ...state,
                 user: null
             }
-        case GITHUB_LOGOUT:
-            return {
-                ...state,
-                }
         case GITHUB_LOGOUT_SUCCESS:
             return {
                 ...state,

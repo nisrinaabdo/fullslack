@@ -11,11 +11,11 @@ export const USERS_LOAD = '@@users/LOAD'
 export const USERS_LOGOUT = '@@users/LOGOUT'
 
 const addUserSuccess = (user) => ({
-    type: USERS_ADD,
+    type: USERS_ADD_SUCCESS,
     user,
 })
 const addUserFailure = (error) => ({
-    type: USERS_ADD,
+    type: USERS_ADD_FAILURE,
     error,
 })
 
@@ -80,13 +80,18 @@ const initialState = {
 
 export const reducer = (state = initialState , action) => {
     switch(action.type) {
-        case USERS_ADD:
+        case USERS_ADD_SUCCESS:
             return {
                 ...state,
                 list: {
                     ...state.list,
                     [action.user.uid]: action.user
                 },
+            }
+        case USERS_ADD_FAILURE:
+            return {
+                ...state,
+                error: action.error,
             }
         case USERS_FETCH:
             return {
