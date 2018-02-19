@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import slugify from 'slugify'
 import './createRoom.css'
 
-import createRoom from '../../index'
-
 class CreateRoom extends Component {
   constructor (props){
     super(props)
@@ -30,7 +28,6 @@ class CreateRoom extends Component {
   }
 
   displayForm = () => {
-    const { roomName } = this.state
     return (
       <div id="addFormWrapper">
         <span>Add new chat-room:</span>

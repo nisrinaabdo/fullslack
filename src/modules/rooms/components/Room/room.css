@@ -1,12 +1,14 @@
-.roomWrapper {
+.roomWrapper a {
+    display: block;
     padding: 5px 5px 5px 15px;
     color: white;
+    text-decoration: none;
 }
 
-.roomWrapper:hover {
+.roomWrapper a:hover {
     background: rgba(0, 0, 0, 0.2);
 }
 
-.roomWrapper:active {
+.selected {
     background: rgba(50, 153, 93, 0.2);
 }

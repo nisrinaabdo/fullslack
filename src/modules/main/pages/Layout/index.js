@@ -23,7 +23,7 @@ class Layout extends Component {
                 <Profile />
             </header>
             <aside className="app-side">
-                <RoomsManager />
+              <Route path='/' component={RoomsManager} />
             </aside>
             <section className="app-main">
               <Route path='/chat/:idRoom' component={ChatList} />
