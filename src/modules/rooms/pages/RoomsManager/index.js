@@ -6,20 +6,12 @@ import './roomsManager.css'
 import RoomsList from '../../components/RoomsList'
 import CreateRoom from '../../components/CreateRoom'
 
-import {updateList, createRoom} from '../../index'
+import {fetchRooms, createRoom} from '../../index'
 
 class RoomsManager extends Component {
   componentWillMount () {
     const { dispatch } = this.props
-    const initialList = [
-      {
-        id: 0,
-        name: 'aaa',
-        description: 'a room',
-        users: []
-      }
-    ]
-    dispatch(updateList(initialList))
+    dispatch(fetchRooms())
   }
 
   onCreateRoom = (room) => this.props.dispatch(createRoom(room))
