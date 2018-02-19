@@ -26,7 +26,7 @@ class Layout extends Component {
                 <RoomsManager />
             </aside>
             <section className="app-main">
-              <ChatList/>
+              <Route path='/chat/:idRoom' component={ChatList} />
             </section>
             </div>
         )}
