@@ -7,7 +7,6 @@ class MessageBox extends Component {
 
 
   state = {
-    user: 'toto',
     messageBody: '',
     datetime:''
   }
@@ -21,9 +20,12 @@ class MessageBox extends Component {
   onSubmitMessage = (e) => {
     // e.preventDefault();
     this.state.datetime = this.setDatetime()
+
+    const message = {...this.state, user: this.props.uid}
+    //console.log(this.state.user)
     //this.props.dispatch(submitMessage(this.state))
+    sendMessage(message, this.props.idRoom)
     this.setState({messageBody: ''})
-    sendMessage(this.state, this.props.idRoom)
   }
 
   handleKeyPress = (e) => {
@@ -58,4 +60,4 @@ class MessageBox extends Component {
   }
 }
 
-export default connect()(MessageBox);
+export default connect(state => state.auth.user)(MessageBox);
