@@ -26,6 +26,7 @@ class MessageBox extends Component {
     //this.props.dispatch(submitMessage(this.state))
     sendMessage(message, this.props.idRoom)
     this.setState({messageBody: ''})
+    sendMessage(this.state, this.props.idRoom)
   }
 
   handleKeyPress = (e) => {

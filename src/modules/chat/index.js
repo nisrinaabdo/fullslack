@@ -28,7 +28,6 @@ const initialState = {
   messages: []
 };
 
-<<<<<<< HEAD
 export const fetchFromFirebase = (idRoom) => (dispatch) => {
   return firebase.database().ref(`/messages/${idRoom}`).on('value', (snapshot) => {
     console.log(`snapshot.val: ${inspect(snapshot.val())}`);
@@ -36,13 +35,6 @@ export const fetchFromFirebase = (idRoom) => (dispatch) => {
       dispatch(fetchMessage(snapshot.val()))
     }
   })
-=======
-const fetchFromFirebase = (idRoom) => {
-    return firebase.database().ref(`/messages/${idRoom}`).on('value', (snapshot) => {
-      console.log(`snapshot.val : ${inspect(snapshot.val())}`);
-      return snapshot.val();          
-    })
->>>>>>> Fetch correctly data from firebase
 }
 
 export const reducer = (state = initialState , action) => {
