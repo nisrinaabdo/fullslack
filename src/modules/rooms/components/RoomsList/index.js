@@ -4,12 +4,12 @@ import Room from '../Room'
 
 class RoomsList extends Component {
   render () {
-    const { rooms } = this.props
+    const { roomsData, chatPath } = this.props
 
     return (
       <div className='roomsListWrapper'>
         <ul>
-          { (rooms && rooms.length) ? rooms.map(room => <Room data={room} key={room.id} />) : ''}
+          { (roomsData && roomsData.length) ? roomsData.map(room => <Room rootPath={chatPath} data={room} key={room.id} />) : ''}
         </ul>
       </div>
     )

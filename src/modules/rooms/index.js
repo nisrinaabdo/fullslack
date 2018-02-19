@@ -2,14 +2,15 @@ import * as firebase from 'firebase'
 
 const FETCH_ROOMS = '@@rooms/FETCH_ROOMS'
 const UPDATE_LIST = '@@rooms/UPDATE_LIST'
-const CREATE_ROOM = '@@rooms/CREATE_ROOM'
 
+export const ROOMS_PATH = '/rooms'
+
+//ACTION: fetch rooms list
 export const fetchRooms = (data) =>
   (dispatch) => {
     dispatch({ type: FETCH_ROOMS })
 
-    return firebase.database().ref('/rooms').once('value')
-    .then(snapshot => {
+    firebase.database().ref(ROOMS_PATH).on('value', (snapshot) => {
       let rooms = []
 
       snapshot.forEach(childSnapshot => {
@@ -21,7 +22,6 @@ export const fetchRooms = (data) =>
       })
       return dispatch(updateList(rooms))
     })
-    .catch(error => console.error(error))
   }
 
 //ACTION: update list values
@@ -31,11 +31,17 @@ export const updateList = (values) => ({
 })
 
 //ACTION: create new room
-export const createRoom = (newRoom) => ({
-  type: CREATE_ROOM,
-  payload: newRoom
-})
+export const createRoom = (newRoom) =>
+  (dispatch) => {
+    return firebase.database().ref(ROOMS_PATH + '/' + newRoom.id).set({
+      'name': newRoom.name,
+      'description': newRoom.description
+    })
+    .catch(error => console.error("Error occured : " + error))
+  }
 
+
+//INITIAL STATE
 const initialState = {
   listRooms: []
 }
@@ -51,11 +57,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         listRooms: action.payload
-      }
-    case CREATE_ROOM:
-      return {
-        ...state,
-        listRooms: [...state.listRooms, action.payload]
       }
     default:
       return state
