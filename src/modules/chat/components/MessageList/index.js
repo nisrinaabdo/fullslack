@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { fetchMessages } from '../../index';
+import { Router } from 'react-router-dom';
 
 import  Message  from '../Message';
 
 class MessageList extends Component {
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    const idRoom = this.props.idRoom;
+    dispatch(fetchMessages(idRoom))
+  }
+
   render() {
     const { messages } = this.props;
     return (

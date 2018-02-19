@@ -13,7 +13,7 @@ class ChatList extends Component {
 
         return (<div className="wrapper">
         
-       <MessageList/>
+       <MessageList idRoom='Toto'/>
        <MessageBox/>
        
         

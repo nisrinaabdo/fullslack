@@ -1,15 +1,15 @@
 import firebase from 'firebase'
 
 export const SUBMIT_MESSAGE = '@@chat/SUBMIT_MESSAGE';
-export const FETCH_MESSAGE = '@@chat/FETCH_MESSAGE';
+export const FETCH_MESSAGES = '@@chat/FETCH_MESSAGES';
 
 export const submitMessage = (msg) =>({
   type: SUBMIT_MESSAGE,
   payload: msg
 });
 
-export const fetchMessage = (roomName) => ({
-  type: FETCH_MESSAGE,
+export const fetchMessages = (roomName) => ({
+  type: FETCH_MESSAGES,
   payload: fetchFromFirebase(roomId)
 });
 
@@ -36,7 +36,7 @@ export const reducer = (state = initialState , action) => {
         ...state,
         messages: [...state.messages, action.payload] 
       }
-    case FETCH_MESSAGE:
+    case FETCH_MESSAGES:
       return {
         ...state,
         messages: [...state.messages, action.payload]
