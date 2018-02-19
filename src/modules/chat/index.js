@@ -31,7 +31,9 @@ const initialState = {
 export const fetchFromFirebase = (idRoom) => (dispatch) => {
   return firebase.database().ref(`/messages/${idRoom}`).on('value', (snapshot) => {
     console.log(`snapshot.val: ${inspect(snapshot.val())}`);
-    dispatch(fetchMessage(snapshot.val()))
+    if(snapshot.val()) {
+      dispatch(fetchMessage(snapshot.val()))
+    }
   })
 }
 
