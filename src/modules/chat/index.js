@@ -32,7 +32,7 @@ export const fetchFromFirebase = (idRoom) => (dispatch) => {
   return firebase.database().ref(`/messages/${idRoom}`).on('value', (snapshot) => {
     console.log(`snapshot.val: ${inspect(snapshot.val())}`);
     if(snapshot.val()) {
-      dispatch(fetchMessage(snapshot.val()))
+      dispatch(fetchMessage(Object.values(snapshot.val())))
     }
   })
 }
@@ -42,12 +42,12 @@ export const reducer = (state = initialState , action) => {
     case SUBMIT_MESSAGE:
       return {
         ...state,
-        messages: [...state.messages, action.payload]
+        messages: [...action.payload]
       }
     case FETCH_MESSAGES:
       return {
         ...state,
-        messages: [...state.messages, ...action.payload]
+        messages: [...action.payload]
       }
     default: return state;
   }
