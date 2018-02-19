@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Login from '../../../auth/components/Login'
 import Logout from '../../../auth/components/Logout'
 import Profile from '../../../auth/components/Profile'
+import RoomsManager from '../../../rooms/pages/RoomsManager'
 
 import './layout.css';
 
@@ -12,7 +13,7 @@ class Layout extends Component {
   render() {
 
     const { user } = this.props.auth
-    
+
     return (
         <Router>
             <div>
@@ -23,7 +24,7 @@ class Layout extends Component {
                 <Profile />
             </header>
             <aside className="app-side">
-                { /* profile header & rooms list */}
+                <RoomsManager />
             </aside>
             <section className="app-main">
                 { /* routes, ex: current chat window, other pages */}
