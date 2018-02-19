@@ -1,5 +1,5 @@
 import * as firebase from 'firebase'
-import { githubLoadUser, githubResetUser } from '../auth' 
+import { githubLoadUser, githubResetUser } from '../auth'
 
 export const USERS_ADD = '@@users/ADD'
 export const USERS_ADD_SUCCESS = '@@users/ADD_SUCCESS'
@@ -9,6 +9,7 @@ export const USERS_FETCH_SUCCESS = '@@users/FETCH_SUCCESS'
 export const USERS_FETCH_FAILURE = '@@users/FETCH_FAILURE'
 export const USERS_LOAD = '@@users/LOAD'
 export const USERS_LOGOUT = '@@users/LOGOUT'
+export const USERS_EDIT = "@@@users/EDIT"
 
 const addUserSuccess = (user) => ({
     type: USERS_ADD_SUCCESS,
@@ -19,7 +20,7 @@ const addUserFailure = (error) => ({
     error,
 })
 
-export const addUser = (user) => 
+export const addUser = (user) =>
     (dispatch) => {
         dispatch({ type: USERS_ADD })
         firebase.database().ref('/users/' + user.uid)
@@ -43,10 +44,11 @@ const fetchUsersFailure = (error) => ({
 
 const listenUser = (snapshot, users, dispatch) => {
     snapshot.forEach((chilSnapshot) => users[chilSnapshot.key] = chilSnapshot.val())
+    console.log(users)
     return dispatch(fetchUsersSuccess(users))
 }
 
-export const fetchUsers = (users) => 
+export const fetchUsers = (users) =>
     (dispatch) => {
         dispatch({ type: USERS_FETCH })
         const users = {}
@@ -71,6 +73,19 @@ export const changeUserAuthState = (user) =>
         } else
             dispatch(() => githubResetUser())
     }
+
+
+export const editUserProfile = (user, name) =>
+  (dispatch) => {
+    console.log('nom :', name, 'user id :', user.uid)
+    dispatch({ type: USERS_EDIT})
+    let updates = {};
+    updates['/users/' + user.uid + '/name'] = name;
+
+    return firebase.database().ref().update(updates);
+    }
+
+
 
 const initialState = {
     list: {},
@@ -105,7 +120,7 @@ export const reducer = (state = initialState , action) => {
                 isLoading: false,
                 list: action.list,
             }
-        
+
         case USERS_FETCH_FAILURE:
             return {
                 ...state,

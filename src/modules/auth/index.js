@@ -12,7 +12,7 @@ export const GITHUB_LOGOUT_FAILURE = '@@github/LOGOUT_FAILURE'
 const provider = new firebase.auth.GithubAuthProvider();
 provider.addScope('user');
 
-export const githubAuth = (data) => 
+export const githubAuth = (data) =>
     (dispatch) => {
         dispatch({ type: GITHUB_AUTH })
         firebase.auth().signInWithRedirect(provider)
