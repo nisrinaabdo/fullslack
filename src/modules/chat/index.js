@@ -19,7 +19,7 @@ const fetchMessage = (messages) => ({
 
 export const sendMessage = (message, idRoom) => {
   const database = firebase.database()
-  const newChatRef = database.ref('message/' + idRoom).push()
+  const newChatRef = database.ref('messages/' + idRoom).push()
   return newChatRef.set(message)
 }
 
