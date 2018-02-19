@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import { submitMessage } from '../../index';
 
 class MessageBox extends Component {
@@ -10,7 +9,7 @@ class MessageBox extends Component {
     messageBody: '',
     datetime:''
   }
-  
+
   setDatetime() {
     const d = new Date()
     return `${d.getDate()}-${d.getMonth()+1}-${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`
@@ -29,7 +28,7 @@ class MessageBox extends Component {
       this.onSubmitMessage()
     }
   }
-  
+
   onInput = (e) => {
     this.setState({ messageBody: e.target.value });
   }
