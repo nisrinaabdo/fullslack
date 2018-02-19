@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Login from '../../../auth/components/Login'
 import Profile from '../../../auth/components/Profile'
 import RoomsManager from '../../../rooms/pages/RoomsManager'
+import ChatList from '../../../chat/pages/ChatList'
 
 import './layout.css';
 
@@ -25,7 +26,7 @@ class Layout extends Component {
                 <RoomsManager />
             </aside>
             <section className="app-main">
-                { /* routes, ex: current chat window, other pages */}
+              <ChatList/>
             </section>
             </div>
         )}
