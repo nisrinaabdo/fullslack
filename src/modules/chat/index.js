@@ -10,10 +10,12 @@ export const submitMessage = (msg) =>({
   payload: msg
 });
 
-export const fetchMessages = (idRoom) => ({
+
+const fetchMessage = (messages) => ({
   type: FETCH_MESSAGES,
-  payload: fetchFromFirebase(idRoom)
-});
+  payload: messages
+})
+
 
 export const sendMessage = (message, idRoom) => {
   const database = firebase.database()
@@ -26,11 +28,13 @@ const initialState = {
   messages: []
 };
 
-const fetchFromFirebase = (idRoom) => {
-    return firebase.database().ref(`/messages/${idRoom}`).on('value', (snapshot) => {
-      console.log(`snapshot.val : ${inspect(snapshot.val())}`);
-      return snapshot.val();
-    })
+export const fetchFromFirebase = (idRoom) => (dispatch) => {
+  return firebase.database().ref(`/messages/${idRoom}`).on('value', (snapshot) => {
+    console.log(`snapshot.val: ${inspect(snapshot.val())}`);
+    if(snapshot.val()) {
+      dispatch(fetchMessage(snapshot.val()))
+    }
+  })
 }
 
 export const reducer = (state = initialState , action) => {
