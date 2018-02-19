@@ -18,13 +18,13 @@ class MessageBox extends Component {
 
   onSubmitMessage = (e) => {
     // e.preventDefault();
-    this.state.datetime = this.setDatetime()
+    this.setState({ datetime: this.setDatetime()})
     this.props.dispatch(submitMessage(this.state))
     this.setState({messageBody: ''})
   }
 
   handleKeyPress = (e) => {
-    if(e.key == 'Enter' && this.state.messageBody !== ''){
+    if(e.key === 'Enter' && this.state.messageBody !== ''){
       this.onSubmitMessage()
     }
   }
