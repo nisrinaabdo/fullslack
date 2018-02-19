@@ -20,7 +20,7 @@ const addUserFailure = error => ({
     error,
 })
 
-export const addUser = user => 
+export const addUser = user =>
     dispatch => {
         dispatch({ type: USERS_ADD })
         firebase.database().ref('/users/' + user.uid)
@@ -44,7 +44,7 @@ const fetchUsersFailure = error => ({
 
 const listenUser = (snapshot, users, dispatch) => {
     snapshot.forEach((childSnapshot) => {
-        users[snapshot.key] = { 
+        users[snapshot.key] = {
             ...users[snapshot.key],
             [childSnapshot.key]: childSnapshot.val()
         }
@@ -52,7 +52,7 @@ const listenUser = (snapshot, users, dispatch) => {
     return dispatch(fetchUsersSuccess(users))
 }
 
-export const fetchUsers = users => 
+export const fetchUsers = users =>
     dispatch => {
         dispatch({ type: USERS_FETCH })
         const users = {}
