@@ -1,4 +1,5 @@
 import * as firebase from 'firebase'
+import { githubLoadUser, githubResetUser } from '../auth'
 
 export const USERS_ADD = '@@users/ADD'
 export const USERS_ADD_SUCCESS = '@@users/ADD_SUCCESS'
@@ -53,28 +54,18 @@ export const fetchUsers = (users) =>
             .catch(error => dispatch(fetchUsersFailure(error)))
     }
 
-const loadUser = user => ({
-    type: USERS_LOAD,
-    user,
-})
-
-const logoutUser = () => ({
-    type: USERS_LOGOUT,
-})
-
 export const changeUserAuthState = (user) =>
     (dispatch) => {
         if (user) {
             dispatch(fetchUsers())
                 .then((data) => {
-                    if (data[user.uid] === undefined) {
+                    if (data.list[user.uid] === undefined) {
                         dispatch(addUser(user))
                     }
-                    dispatch(loadUser(user))
+                    dispatch(githubLoadUser(user))
                 })
-        } else {
-            dispatch(logoutUser())
-        }
+        } else
+            dispatch(() => githubResetUser())
     }
 
 const initialState = {
