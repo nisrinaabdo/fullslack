@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import slugify from 'slugify'
 import './createRoom.css'
 
 import createRoom from '../../index'
@@ -29,6 +30,7 @@ class CreateRoom extends Component {
   }
 
   displayForm = () => {
+    const { roomName } = this.state
     return (
       <div id="addFormWrapper">
         <span>Add new chat-room:</span>
@@ -42,15 +44,34 @@ class CreateRoom extends Component {
     )
   }
 
+  /*
+    Handle form submitted data
+  */
   handleSubmit = (event) => {
+    //Prevent default behaviour
     event.preventDefault()
+
+    //Send data the reducer
     if (event) {
       const target = event.target
+
+      //Process room name value
+      const roomId = slugify(target.name.value, {
+        replacement: '-',
+        remove: /[$*_+~.()'"!;?{}/:@]/g,
+        lower: true
+      })
+
       const newRoom = {
-        name: target.name.value.trim(),
+        id: roomId,
+        name: target.name.value,
         description: target.description.value.trim()
       }
+
+      //Use callback passed as parameters with room object
       this.props.creationCbk(newRoom)
+
+      //Seg local stat to trigger local rendering
       this.setState({formActive: false})
     }
   }
