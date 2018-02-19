@@ -21,7 +21,7 @@ class RoomsManager extends Component {
     return (
       <div className='roomsManagerWrapper'>
         <CreateRoom creationCbk={this.onCreateRoom} />
-        <RoomsList rooms={listRooms} />
+        <RoomsList roomsData={listRooms} chatPath={'/chat'}/>
       </div>
     )
   }
