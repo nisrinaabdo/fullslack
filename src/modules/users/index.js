@@ -1,5 +1,4 @@
 import * as firebase from 'firebase'
-import functions from 'firebase-functions'
 import { githubLoadUser, githubResetUser } from '../auth' 
 
 export const USERS_ADD = '@@users/ADD'
