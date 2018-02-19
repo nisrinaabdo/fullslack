@@ -8,7 +8,7 @@ import firebase from 'firebase';
 import { reducer as authReducer } from './modules/auth';
 import { reducer as mainReducer } from './modules/main';
 import { reducer as chatReducer } from './modules/chat';
-import { reducer as roomsReducer } from './modules/rooms';
+import roomsReducer from './modules/rooms';
 import { reducer as usersReducer } from './modules/users';
 
 import './index.css';
