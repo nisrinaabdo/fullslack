@@ -17,7 +17,8 @@ export const fetchRooms = (data) =>
         rooms.push({
           'id': childSnapshot.key,
           'name': childSnapshot.val().name,
-          'description': childSnapshot.val().description
+          'description': childSnapshot.val().description,
+          'users': childSnapshot.val().users
         })
       })
       return dispatch(updateList(rooms))
@@ -35,7 +36,8 @@ export const createRoom = (newRoom) =>
   (dispatch) => {
     return firebase.database().ref(ROOMS_PATH + '/' + newRoom.id).set({
       'name': newRoom.name,
-      'description': newRoom.description
+      'description': newRoom.description,
+      'users': newRoom.users
     })
     .catch(error => console.error("Error occured : " + error))
   }

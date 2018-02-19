@@ -17,16 +17,21 @@ class RoomsManager extends Component {
   onCreateRoom = (room) => this.props.dispatch(createRoom(room))
 
   render () {
-    const { listRooms } = this.props
+    const { listRooms, user } = this.props
+    const userId = user ? user.uid : null
+
     return (
       <div className='roomsManagerWrapper'>
-        <CreateRoom creationCbk={this.onCreateRoom} />
-        <RoomsList roomsData={listRooms} chatPath={'/chat'}/>
+        <CreateRoom creationCbk={ this.onCreateRoom } ownerId={ userId } />
+        <RoomsList roomsData={ listRooms } chatPath={ '/chat' }/>
       </div>
     )
   }
 }
 
 export default connect(
-  state => state.rooms
+  state => ({
+    ...state.rooms,
+    ...state.auth
+  })
 )(RoomsManager)

@@ -59,10 +59,17 @@ class CreateRoom extends Component {
         lower: true
       })
 
+      let roomOwner = {}
+
+      roomOwner[this.props.ownerId] = {
+        dateJoined: new Date().toUTCString()
+      }
+
       const newRoom = {
         id: roomId,
         name: target.name.value,
-        description: target.description.value.trim()
+        description: target.description.value.trim(),
+        users: roomOwner
       }
 
       //Use callback passed as parameters with room object
