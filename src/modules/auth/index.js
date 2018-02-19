@@ -6,6 +6,8 @@ export const GITHUB_AUTH_FAILURE = '@@github/AUTH_FAILURE'
 export const GITHUB_LOAD_USER = '@@github/LOAD_USER'
 export const GITHUB_RESET_USER = '@@github/RESET_USER'
 export const GITHUB_LOGOUT = '@@github/LOGOUT'
+export const GITHUB_LOGOUT_SUCCESS = '@@github/LOGOUT_SUCCESS'
+export const GITHUB_LOGOUT_FAILURE = '@@github/LOGOUT_FAILURE'
 
 const provider = new firebase.auth.GithubAuthProvider();
 provider.addScope('user');
@@ -19,8 +21,7 @@ export const githubAuth = (data) =>
         .catch(error => dispatch(githubAuthFailure(error)))
     }
 
-
-const githubAuthSuccess = (result)=> {
+const githubAuthSuccess = (result) => {
     if (result.credential) {
         // This gives you a GitHub Access Token. You can use it to access the GitHub API.
         var token = result.credential.accessToken;
@@ -35,31 +36,37 @@ const githubAuthSuccess = (result)=> {
         }
 }
 
-const githubAuthFailure = (error) => {
-   // Handle Errors here.
-   var errorCode = error.code;
-   var errorMessage = error.message;
-   // The email of the user's account used.
-   var email = error.email;
-   // The firebase.auth.AuthCredential type that was used.
-   var credential = error.credential;
-   // ...
-   return {
-       type: GITHUB_AUTH_FAILURE,
-       error,
-   }
-}
+const githubAuthFailure = (error) => ({
+    type: GITHUB_AUTH_FAILURE,
+    error,
+})
 
-export const githubLogout = () => {
-    firebase.auth().signOut().then(function() {
-        // Sign-out successful.
-      }).catch(function(error) {
-        // An error happened.
-      });
-    return {
-        type: GITHUB_LOGOUT,
+const githubLogoutSuccess = user => ({
+    type: GITHUB_LOGOUT_SUCCESS,
+    user: null,
+})
+
+const githubLogoutFailure = error => ({
+    type: GITHUB_LOGOUT_FAILURE,
+    error,
+})
+
+export const githubLogout = () =>
+    (dispatch) => {
+        dispatch({ type: GITHUB_LOGOUT })
+        firebase.auth().signOut()
+            .then(() => dispatch(githubLogoutSuccess()))
+            .catch(error => dispatch(githubLogoutFailure()))
     }
-}
+
+export const githubLoadUser = user => ({
+    type: GITHUB_LOAD_USER,
+    user,
+})
+
+export const githubResetUser = () => ({
+    type: GITHUB_RESET_USER,
+})
 
 const initialState = {
     user: null,
@@ -94,13 +101,19 @@ export const reducer = (state = initialState , action) => {
             }
 
         case GITHUB_RESET_USER:
-        return {
-            ...state,
-            user: null
-        }
-        case GITHUB_LOGOUT:
-        return {
-            ...state,
+            return {
+                ...state,
+                user: null
+            }
+        case GITHUB_LOGOUT_SUCCESS:
+            return {
+                ...state,
+                user: action.user,
+            }
+        case GITHUB_LOGOUT_FAILURE:
+            return {
+                ...state,
+                error: action.error,
             }
         default:
             return state

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { githubAuth, GITHUB_LOAD_USER, GITHUB_RESET_USER }  from '../../index'
+import { githubAuth }  from '../../index'
+import { changeUserAuthState }  from '../../../users'
 import * as firebase from 'firebase';
 
 class Login extends Component {
@@ -17,12 +18,13 @@ class Login extends Component {
     } 
     componentDidMount = () => {
         const { dispatch } = this.props
-        firebase.auth().onAuthStateChanged(user => {
-            user
-            ? dispatch({type:GITHUB_LOAD_USER, user})
-            : dispatch({type: GITHUB_RESET_USER})
-        })
+        firebase.auth().onAuthStateChanged(user => dispatch(changeUserAuthState(user)))
     }
 }
 
-export default connect()(Login)
+export default connect(
+    (state) => ({
+        auth: state.auth,
+        users: state.users
+    })
+)(Login)
