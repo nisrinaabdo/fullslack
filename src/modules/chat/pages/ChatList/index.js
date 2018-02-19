@@ -10,13 +10,13 @@ class ChatList extends Component {
     }
 
     render(){
-
+        console.log(this.props.match.params.idRoom)
         return (<div className="wrapper">
-        
+
        <MessageList idRoom={this.props.match.params.idRoom}/>
-       <MessageBox/>
-       
-        
+       <MessageBox  idRoom={this.props.match.params.idRoom}/>
+
+
         </div>)
     }
 }

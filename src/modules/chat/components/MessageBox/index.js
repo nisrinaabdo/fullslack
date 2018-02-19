@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { submitMessage } from '../../index';
-
+import firebase from 'firebase';
+import {sendMessage} from '../../index';
 class MessageBox extends Component {
+
 
   state = {
     user: 'toto',
@@ -18,13 +20,14 @@ class MessageBox extends Component {
 
   onSubmitMessage = (e) => {
     // e.preventDefault();
-    this.setState({ datetime: this.setDatetime()})
-    this.props.dispatch(submitMessage(this.state))
+    this.state.datetime = this.setDatetime()
+    //this.props.dispatch(submitMessage(this.state))
     this.setState({messageBody: ''})
+    sendMessage(this.state, this.props.idRoom)
   }
 
   handleKeyPress = (e) => {
-    if(e.key === 'Enter' && this.state.messageBody !== ''){
+    if(e.key == 'Enter' && this.state.messageBody !== ''){
       this.onSubmitMessage()
     }
   }
