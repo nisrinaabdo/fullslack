@@ -1,4 +1,6 @@
-import firebase from 'firebase'
+import firebase from 'firebase';
+import { inspect } from 'util';
+
 
 export const SUBMIT_MESSAGE = '@@chat/SUBMIT_MESSAGE';
 export const FETCH_MESSAGES = '@@chat/FETCH_MESSAGES';
@@ -20,7 +22,7 @@ const initialState = {
 
 const fetchFromFirebase = (idRoom) => {
     return firebase.database().ref(`/messages/${idRoom}`).on('value', (snapshot) => {
-      console.log(`snapshot.val : ${snapshot.val()}`);
+      console.log(`snapshot.val : ${inspect(snapshot.val())}`);
       return snapshot.val();          
     })
 }
@@ -35,7 +37,7 @@ export const reducer = (state = initialState , action) => {
     case FETCH_MESSAGES:
       return {
         ...state,
-        messages: [...state.messages, action.payload]
+        messages: [...state.messages, ...action.payload]
       }
     default: return state;
   }
