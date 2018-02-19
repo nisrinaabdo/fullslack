@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Login from '../../../auth/components/Login'
-import Logout from '../../../auth/components/Logout'
 import Profile from '../../../auth/components/Profile'
 import RoomsManager from '../../../rooms/pages/RoomsManager'
 
@@ -11,7 +10,6 @@ import './layout.css';
 
 class Layout extends Component {
   render() {
-
     const { user } = this.props.auth
 
     return (
@@ -40,6 +38,7 @@ class Layout extends Component {
 
 export default connect(
     state => ({
-        auth: state.auth
+        auth: state.auth,
+        users: state.users,
     })
 )(Layout);

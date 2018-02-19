@@ -35,20 +35,10 @@ const githubAuthSuccess = (result)=> {
         }
 }
 
-const githubAuthFailure = (error) => {
-   // Handle Errors here.
-   var errorCode = error.code;
-   var errorMessage = error.message;
-   // The email of the user's account used.
-   var email = error.email;
-   // The firebase.auth.AuthCredential type that was used.
-   var credential = error.credential;
-   // ...
-   return {
-       type: GITHUB_AUTH_FAILURE,
-       error,
-   }
-}
+const githubAuthFailure = (error) => ({
+    type: GITHUB_AUTH_FAILURE,
+    error,
+})
 
 export const githubLogout = () => {
     firebase.auth().signOut().then(function() {
