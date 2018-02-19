@@ -1,5 +1,6 @@
 import * as firebase from 'firebase'
-import { githubLoadUser, githubResetUser } from '../auth'
+import functions from 'firebase-functions'
+import { githubLoadUser, githubResetUser } from '../auth' 
 
 export const USERS_ADD = '@@users/ADD'
 export const USERS_ADD_SUCCESS = '@@users/ADD_SUCCESS'
@@ -41,17 +42,21 @@ const fetchUsersFailure = (error) => ({
     isLoading: false,
 })
 
+const listenUser = (snapshot, users, dispatch) => {
+    snapshot.forEach((chilSnapshot) => users[chilSnapshot.key] = chilSnapshot.val())
+    return dispatch(fetchUsersSuccess(users))
+}
+
 export const fetchUsers = (users) => 
     (dispatch) => {
         dispatch({ type: USERS_FETCH })
         const users = {}
         const request = firebase.database().ref('/users')
-        return request.once('value')
-            .then((snapshot) => {
-                snapshot.forEach((chilSnapshot) => users[chilSnapshot.key] = chilSnapshot.val())
-                return dispatch(fetchUsersSuccess(users))
-            })
+        const response = request.once('value')
+            .then((snapshot) => listenUser(snapshot, users, dispatch))
             .catch(error => dispatch(fetchUsersFailure(error)))
+        request.on('value', (snapshot) => listenUser(snapshot, users, dispatch))
+        return response
     }
 
 export const changeUserAuthState = (user) =>

@@ -19,21 +19,6 @@ class Login extends Component {
     componentDidMount = () => {
         const { dispatch } = this.props
         firebase.auth().onAuthStateChanged(user => dispatch(changeUserAuthState(user)))
-        /*
-        firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-                dispatch(fetchUsers())
-                    .then((data) => {
-                        if (data.list[user.uid] === undefined) {
-                            dispatch(addUser(user))
-                        }
-                        dispatch({ type:GITHUB_LOAD_USER, user })
-                    })
-            } else {
-                dispatch({ type: GITHUB_RESET_USER })
-            }
-        })
-        */
     }
 }
 
