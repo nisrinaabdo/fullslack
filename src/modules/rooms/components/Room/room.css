@@ -1,5 +1,7 @@
 .roomWrapper a {
-    display: block;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     padding: 5px 5px 5px 15px;
     color: white;
     text-decoration: none;
@@ -11,4 +13,8 @@
 
 .selected {
     background: rgba(50, 153, 93, 0.2);
+}
+
+.roomWrapper a span {
+    display: inline-block;
 }

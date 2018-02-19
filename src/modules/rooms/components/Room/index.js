@@ -7,12 +7,12 @@ import './room.css'
 
 class Room extends Component {
   render() {
-    const {rootPath, data: { id, name } } = this.props
+    const {rootPath, data: { id, name, users } } = this.props
     const roomPath = `${rootPath}/${id}` //construction du chemin d'accès à la 'room'
 
     return (
       <li className="roomWrapper">
-        <NavLink to={roomPath} activeClassName="selected">{name}</NavLink>
+        <NavLink to={roomPath} activeClassName="selected"><span>{name}</span><span>({ users ? Object.keys(users).length : 0})</span></NavLink>
       </li>
     )
   }
