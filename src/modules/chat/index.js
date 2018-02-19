@@ -1,8 +1,5 @@
 export const SUBMIT_MESSAGE = '@@chat/SUBMIT_MESSAGE';
-<<<<<<< HEAD
 
-=======
->>>>>>> add reducer in chat and MessageList component
 export const submitMessage = (msg) =>({
   type: SUBMIT_MESSAGE,
   payload: msg
@@ -23,9 +20,6 @@ export const reducer = (state = initialState , action) => {
     default: return state;
   }
 }
-<<<<<<< HEAD
 
 export const reducer = (state = {} , action) => state;
 
-=======
->>>>>>> add reducer in chat and MessageList component
